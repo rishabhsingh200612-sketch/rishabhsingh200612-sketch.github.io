@@ -39,13 +39,22 @@ ul{padding-left:20px;}
     padding:20px;
     color:#9ca3af;
 }
-.badge{
-    display:inline-block;
-    background:#0ea5e9;
-    padding:4px 10px;
-    border-radius:20px;
-    margin:5px;
-    font-size:13px;
+
+/* Meta Ads Results Gallery */
+.results-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:15px;
+}
+.results-grid img{
+    width:100%;
+    border-radius:10px;
+    border:2px solid #38bdf8;
+    transition:0.3s;
+}
+.results-grid img:hover{
+    transform:scale(1.05);
 }
 </style>
 </head>
@@ -119,7 +128,6 @@ ul{padding-left:20px;}
 
 <h2 class="section-title">📢 Google Ads Campaign Work</h2>
 <div class="card">
-<p>Experience in:</p>
 <ul>
 <li>Search Ads</li>
 <li>Display Ads</li>
@@ -148,30 +156,39 @@ ul{padding-left:20px;}
 </ul>
 </div>
 
+<!-- NEW SECTION -->
+<h2 class="section-title">📈 Meta Ads Campaign Results</h2>
+
+<div class="card">
+<p>Some real performance results from my Meta Ads campaigns:</p>
+
+<div class="results-grid">
+    <img src="images/" alt="Meta Ads Result 1">
+    <img src="images/result2.jpg" alt="Meta Ads Result 2">
+    <img src="images/result3.jpg" alt="Meta Ads Result 3">
+</div>
+</div>
+
 <h2 class="section-title">🌐 My Completed Websites</h2>
 
 <div class="card">
 <h3>1️⃣ MatrimonialToday.com</h3>
 <p><a href="https://matrimonialtoday.com/" target="_blank">Visit Website</a></p>
-<p>Matchmaking / Dating Platform</p>
 </div>
 
 <div class="card">
 <h3>2️⃣ Shani Mandir</h3>
 <p><a href="https://shanimandiralipur.com/" target="_blank">Visit Website</a></p>
-<p>Temple Website</p>
 </div>
 
 <div class="card">
 <h3>3️⃣ Plot Land Property</h3>
 <p><a href="https://plotlandproperty.com/" target="_blank">Visit Website</a></p>
-<p>Real Estate Directory</p>
 </div>
 
 <div class="card">
 <h3>4️⃣ JatPeople</h3>
 <p><a href="https://jatpeople.com/" target="_blank">Visit Website</a></p>
-<p>Community Directory</p>
 </div>
 
 <h2 class="section-title">🎓 Education</h2>
@@ -179,7 +196,7 @@ ul{padding-left:20px;}
 <ul>
 <li>10th Grade – 70%</li>
 <li>12th Commerce – 74%</li>
-<li>Learning: Advanced WordPress, SEO, Meta Ads</li>
+<li>Advanced WordPress, SEO, Meta Ads</li>
 </ul>
 </div>
 
@@ -199,7 +216,7 @@ ul{padding-left:20px;}
 <p>Email: Rishabhsingh200612@gmail.com</p>
 <p>WhatsApp: 9711459192</p>
 <p>Location: India</p>
-<p>GitHub: github.com/rishabh...</p>
+<p>GitHub: github.com/rishabh</p>
 </div>
 
 <div class="footer">
