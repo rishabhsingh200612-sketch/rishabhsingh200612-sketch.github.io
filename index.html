@@ -1,4 +1,4 @@
-Put your HTML text here<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -205,8 +205,14 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 .reveal.in{opacity:1;transform:translateY(0)}
 .reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
 
-/* === RESPONSIVE === */
-@media(max-width:1024px){.hero-photo-ring{width:240px;height:240px}.about-grid{gap:3rem}}
+/* ============================================
+   RESPONSIVE — FIXED FOR MOBILE
+   ============================================ */
+@media(max-width:1024px){
+  .hero-photo-ring{width:240px;height:240px}
+  .about-grid{gap:3rem}
+}
+
 @media(max-width:860px){
   #hero{grid-template-columns:1fr;padding:6.5rem 5% 4rem;text-align:center;gap:2.5rem}
   .hero-left{display:flex;flex-direction:column;align-items:center}
@@ -219,28 +225,102 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   .skills-wrap{grid-template-columns:repeat(3,1fr)}
   .contact-links{grid-template-columns:1fr}
 }
+
 @media(max-width:600px){
+  /* NAV */
   .nav-links{display:none}
   .hamburger{display:flex}
-  nav{padding:1rem 5%}
-  h1.hero-name{font-size:clamp(2.8rem,14vw,4.5rem);letter-spacing:-2px}
-  .hero-photo-ring{width:165px;height:165px}
-  .hero-stats{gap:0.6rem}
-  .stat-orb{padding:0.9rem 0.7rem}
-  .orb-num{font-size:1.8rem}
-  .orb-label{font-size:0.58rem}
-  section{padding:3.5rem 5%}
-  h2.s-title{font-size:1.85rem;letter-spacing:-1px}
+  nav{padding:0.85rem 4%}
+
+  /* HERO — main fix: naam screen ke andar rahega */
+  #hero{
+    padding:5.5rem 4% 3rem;
+    gap:1.8rem;
+    min-height:100svh;
+  }
+  h1.hero-name{
+    font-size:clamp(2.2rem,10.5vw,3.5rem);
+    letter-spacing:-1px;
+    line-height:0.95;
+    word-break:break-word;
+    overflow-wrap:break-word;
+    width:100%;
+    max-width:100%;
+  }
+  h1.hero-name .line2{-webkit-text-stroke:1.5px var(--ink)}
+  .hero-eyebrow{
+    font-size:0.66rem;
+    letter-spacing:2px;
+    padding:0.35rem 0.85rem;
+    margin-bottom:1.1rem;
+  }
+  .hero-desc{
+    font-size:0.9rem;
+    max-width:100%;
+    margin-bottom:1.5rem;
+  }
+  /* Buttons — full width on mobile */
+  .hero-actions{
+    flex-direction:column;
+    align-items:stretch;
+    gap:0.75rem;
+    width:100%;
+  }
+  .btn-fire{
+    width:100%;
+    justify-content:center;
+    padding:0.88rem 1.5rem;
+    font-size:0.86rem;
+  }
+  .btn-ghost{
+    justify-content:center;
+    padding-bottom:3px;
+  }
+
+  /* PHOTO + STATS */
+  .hero-photo-ring{width:150px;height:150px}
+  .hero-stats{gap:0.5rem}
+  .stat-orb{padding:0.8rem 0.55rem;min-width:0;flex:1}
+  .orb-num{font-size:1.55rem}
+  .orb-label{font-size:0.55rem;letter-spacing:0.8px}
+
+  /* SECTIONS */
+  section{padding:3rem 4%}
+  h2.s-title{font-size:1.75rem;letter-spacing:-0.8px}
+  .s-sub{font-size:0.87rem;margin-bottom:2rem}
+
+  /* CARDS */
   .services-grid,.work-grid{grid-template-columns:1fr}
+  .svc-card{padding:1.6rem}
   .results-grid{grid-template-columns:1fr 1fr}
+
+  /* ABOUT */
   .skills-wrap{grid-template-columns:1fr 1fr}
-  footer{flex-direction:column;text-align:center}
+  .about-text{font-size:0.9rem}
+
+  /* CONTACT */
   .contact-links{grid-template-columns:1fr}
+  .clink{padding:1rem}
+
+  /* FOOTER */
+  footer{flex-direction:column;text-align:center;padding:1.8rem 4%}
+
+  /* WHATSAPP */
+  .wa-float{width:48px;height:48px;font-size:1.2rem;bottom:1rem;right:1rem}
 }
-@media(max-width:380px){
+
+@media(max-width:430px){
+  h1.hero-name{font-size:clamp(1.9rem,9.5vw,2.8rem);letter-spacing:-0.5px}
+  .hero-photo-ring{width:135px;height:135px}
+  .stat-orb{padding:0.7rem 0.45rem}
+  .orb-num{font-size:1.35rem}
   .results-grid{grid-template-columns:1fr}
-  h1.hero-name{font-size:2.5rem}
-  .hero-photo-ring{width:145px;height:145px}
+}
+
+@media(max-width:360px){
+  h1.hero-name{font-size:1.85rem;letter-spacing:-0.3px}
+  .hero-photo-ring{width:120px;height:120px}
+  .hero-eyebrow{font-size:0.58rem;letter-spacing:1.5px}
 }
 </style>
 </head>
