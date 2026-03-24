@@ -134,25 +134,19 @@ h1.hero-name .line3{
 
 /* FLOATING STATS */
 .hero-stats-float{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;gap:1.5rem;
-  align-items:center;justify-content:center;
+  display:flex;flex-direction:row;gap:1rem;flex-wrap:wrap;justify-content:center;
 }
 .stat-orb{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:24px;
-  padding:1.8rem 2.2rem;
+  border-radius:20px;
+  padding:1.4rem 1.6rem;
   text-align:center;
   box-shadow:0 8px 32px rgba(0,0,0,0.07);
   transition:transform 0.3s,box-shadow 0.3s;
-  width:200px;
+  flex:1;min-width:110px;
 }
-.stat-orb:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 20px 50px rgba(232,73,30,0.15)}
-.stat-orb:nth-child(2){transform:translateX(30px)}
-.stat-orb:nth-child(2):hover{transform:translateX(30px) translateY(-6px) rotate(1deg)}
-.stat-orb:nth-child(3){transform:translateX(-20px)}
-.stat-orb:nth-child(3):hover{transform:translateX(-20px) translateY(-6px) rotate(-1deg)}
+.stat-orb:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(232,73,30,0.15)}
 .orb-num{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .orb-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:0.3rem}
 
@@ -303,7 +297,7 @@ h2.s-title em{font-style:italic;color:var(--fire)}
   font-size:3.5rem;
   position:relative;overflow:hidden;
 }
-.work-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
+.work-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
 .work-card:hover .work-thumb img{transform:scale(1.05)}
 .thumb-bg-1{background:linear-gradient(135deg,#1a0a00,#3d1500)}
 .thumb-bg-2{background:linear-gradient(135deg,#000d1a,#00254d)}
@@ -433,19 +427,101 @@ footer{
 /* DECORATIVE LINE */
 .deco-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 
+/* WHATSAPP FLOAT */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:999;
+  width:58px;height:58px;
+  background:#25D366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 24px rgba(37,211,102,0.45);
+  text-decoration:none;font-size:1.6rem;
+  transition:transform 0.2s,box-shadow 0.2s;
+  animation:wa-bounce 2s ease-in-out infinite;
+}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,0.6)}
+@keyframes wa-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{
+  display:none;position:fixed;top:64px;left:0;right:0;
+  background:rgba(250,248,244,0.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:1.5rem 5%;flex-direction:column;gap:1.2rem;z-index:99;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--ink);text-decoration:none;font-size:1rem;font-weight:600;letter-spacing:0.5px;padding:0.5rem 0;border-bottom:1px solid var(--border)}
+.mobile-menu a:last-child{border-bottom:none;color:var(--fire)}
+
+/* HERO PROFILE IMAGE */
+.hero-photo-wrap{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1.5rem;
+}
+.hero-photo-ring{
+  width:260px;height:260px;
+  border-radius:50%;
+  background:var(--grad);
+  padding:4px;
+  box-shadow:0 20px 60px rgba(232,73,30,0.3);
+  flex-shrink:0;
+}
+.hero-photo{
+  width:100%;height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  background:linear-gradient(135deg,#1a0a00,#3d1500);
+}
+.hero-photo-placeholder{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:linear-gradient(135deg,#2a1000,#4d2000);
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+}
+
+/* CLINK WA */
+.clink-wa{border-color:rgba(37,211,102,0.3)!important}
+.clink-wa:hover{background:rgba(37,211,102,0.12)!important;border-color:rgba(37,211,102,0.5)!important}
+
 /* RESPONSIVE */
 @media(max-width:900px){
-  #hero{grid-template-columns:1fr;padding:6rem 5% 3rem}
-  .hero-stats-float{flex-direction:row;flex-wrap:wrap;justify-content:flex-start}
+  #hero{grid-template-columns:1fr;padding:6rem 5% 3rem;text-align:center}
+  .hero-left{display:flex;flex-direction:column;align-items:center}
+  .hero-eyebrow,.hero-desc,.hero-actions{text-align:center}
+  .hero-actions{justify-content:center}
+  .hero-stats-float{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:1rem}
   .stat-orb:nth-child(2),.stat-orb:nth-child(3){transform:none}
+  .hero-photo-ring{width:200px;height:200px}
   .about-grid,.contact-wrap{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
+  .scroll-hint{display:none}
+  .skills-wrap{grid-template-columns:1fr 1fr 1fr}
 }
 @media(max-width:600px){
   .nav-links{display:none}
-  h1.hero-name{letter-spacing:-2px}
-  .stat-orb{width:160px;padding:1.2rem 1.5rem}
-  .orb-num{font-size:2.2rem}
+  .hamburger{display:flex}
+  h1.hero-name{letter-spacing:-2px;font-size:clamp(3rem,15vw,5rem)}
+  .stat-orb{width:calc(50% - 0.5rem);padding:1.2rem 1rem}
+  .orb-num{font-size:2rem}
+  .hero-photo-ring{width:170px;height:170px}
+  section{padding:4rem 5%}
+  .services-grid{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr 1fr}
+  .contact-wrap{gap:3rem}
+  .skills-wrap{grid-template-columns:1fr 1fr}
+  h2.s-title{font-size:2rem;letter-spacing:-1px}
+  footer{flex-direction:column;text-align:center;gap:1.2rem}
+}
+@media(max-width:400px){
+  .results-grid{grid-template-columns:1fr}
+  .stat-orb{width:100%}
 }
 </style>
 </head>
@@ -465,9 +541,22 @@ footer{
     <li><a href="#results">Results</a></li>
     <li><a href="#contact" class="nav-hire">Hire Me</a></li>
   </ul>
+  <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#work" onclick="closeMenu()">Work</a>
+  <a href="#results" onclick="closeMenu()">Results</a>
+  <a href="#contact" onclick="closeMenu()">Hire Me →</a>
+</div>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/919711459192?text=Hi%20Rishabh%2C%20I%20want%20to%20hire%20you!" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
 <section id="hero">
   <div class="hero-blob"></div>
   <div class="hero-noise"></div>
@@ -488,18 +577,24 @@ footer{
     </div>
   </div>
 
-  <div class="hero-stats-float reveal reveal-d2">
-    <div class="stat-orb">
-      <div class="orb-num">3+</div>
-      <div class="orb-label">Years Exp.</div>
+  <div class="hero-photo-wrap reveal reveal-d2">
+    <div class="hero-photo-ring">
+      <img src="images/WhatsApp Image 2025-12-11 at 10.48.44 AM.jpeg" class="hero-photo" alt="Rishabh Singh" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="hero-photo-placeholder" style="display:none">👨‍💼</div>
     </div>
-    <div class="stat-orb">
-      <div class="orb-num">20+</div>
-      <div class="orb-label">Clients</div>
-    </div>
-    <div class="stat-orb">
-      <div class="orb-num">₹50L+</div>
-      <div class="orb-label">Ad Spend</div>
+    <div class="hero-stats-float">
+      <div class="stat-orb">
+        <div class="orb-num">3+</div>
+        <div class="orb-label">Years Exp.</div>
+      </div>
+      <div class="stat-orb">
+        <div class="orb-num">20+</div>
+        <div class="orb-label">Clients</div>
+      </div>
+      <div class="stat-orb">
+        <div class="orb-num">₹50L+</div>
+        <div class="orb-label">Ad Spend</div>
+      </div>
     </div>
   </div>
 
@@ -544,6 +639,8 @@ footer{
         <div class="skill-pill">ROAS Optimization</div>
         <div class="skill-pill">Retargeting</div>
         <div class="skill-pill">Copywriting</div>
+        <div class="skill-pill">WordPress Development</div>
+        <div class="skill-pill">Website Building</div>
       </div>
     </div>
     <div class="about-right reveal reveal-d2">
@@ -604,6 +701,14 @@ footer{
         <div class="svc-tags"><span>Audit</span><span>Strategy</span><span>Scaling</span></div>
       </div>
     </div>
+    <div class="svc-card reveal reveal-d4">
+      <div class="svc-inner">
+        <div class="svc-num">05</div>
+        <div class="svc-title">WordPress Website Development</div>
+        <div class="svc-desc">Professional WordPress websites built from scratch — fast, mobile-friendly, and SEO-ready. Business sites, landing pages, and blogs that look great and convert well.</div>
+        <div class="svc-tags"><span>WordPress</span><span>Landing Page</span><span>SEO</span><span>Mobile Ready</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -619,8 +724,8 @@ footer{
 
     <div class="work-card reveal reveal-d1">
       <div class="work-thumb thumb-bg-1">
-        <img src="images/shanimandir.png" alt="Shani Mandir" onerror="this.style.display='none'"/>
-        <span style="position:absolute;font-size:3rem">🕉️</span>
+        <img src="images/shanimandir.png" alt="Shani Mandir" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"/>
+        <span>🕉️</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Religious / Social Media</div>
@@ -632,8 +737,8 @@ footer{
 
     <div class="work-card reveal reveal-d2">
       <div class="work-thumb thumb-bg-2">
-        <img src="images/matrimonialtoday.png" alt="Matrimonial Today" onerror="this.style.display='none'"/>
-        <span style="position:absolute;font-size:3rem">💍</span>
+        <img src="images/matrimonialtoday.png" alt="Matrimonial Today" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"/>
+        <span>💍</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Matrimony / Lead Generation</div>
@@ -645,8 +750,8 @@ footer{
 
     <div class="work-card reveal reveal-d3">
       <div class="work-thumb thumb-bg-3">
-        <img src="images/plotland.png" alt="Real Estate" onerror="this.style.display='none'"/>
-        <span style="position:absolute;font-size:3rem">🏘️</span>
+        <img src="images/plotland.png" alt="Real Estate" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"/>
+        <span>🏘️</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Real Estate / Performance</div>
@@ -695,7 +800,7 @@ footer{
     </div>
 
     <div class="result-card reveal reveal-d4">
-      <img src="images/google1.png" class="result-img" alt="Google Ads Result" onerror="this.style.display='none'"/>
+      <img src="images/google1.png" class="result-img" alt="Google Ads Result" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
       <div class="result-img-placeholder" style="display:none">💰</div>
       <div class="result-body">
         <div class="result-big">₹50L+</div>
@@ -703,6 +808,30 @@ footer{
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- GOOGLE ADS PROOF -->
+<section style="background:var(--cream);padding:4rem 5%">
+  <div class="s-tag reveal">Google Ads Screenshots</div>
+  <h2 class="s-title reveal reveal-d1">Campaign <em>Proof</em></h2>
+  <p class="s-sub reveal reveal-d2">Real Google Ads dashboard screenshots from live campaigns.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+    <div class="result-card reveal reveal-d1">
+      <img src="images/google1.png" class="result-img" alt="Google Ads Campaign 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="result-img-placeholder" style="display:none">📊</div>
+      <div class="result-body"><div class="result-big">Google Ads</div><div class="result-note">Search Campaign Performance Dashboard</div></div>
+    </div>
+    <div class="result-card reveal reveal-d2">
+      <img src="images/google2.png" class="result-img" alt="Google Ads Campaign 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="result-img-placeholder" style="display:none">📈</div>
+      <div class="result-body"><div class="result-big">Google Ads</div><div class="result-note">Conversion Tracking & ROAS Report</div></div>
+    </div>
+    <div class="result-card reveal reveal-d3">
+      <img src="images/google3.png" class="result-img" alt="Google Ads Campaign 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="result-img-placeholder" style="display:none">🎯</div>
+      <div class="result-body"><div class="result-big">Google Ads</div><div class="result-note">Keyword Performance & Quality Score</div></div>
+    </div>
   </div>
 </section>
 
@@ -715,13 +844,17 @@ footer{
       <h2 class="s-title reveal reveal-d1">Let's Build Something <em>Together.</em></h2>
       <p class="reveal reveal-d2">Ready to scale your brand with high-performance advertising? Let's talk about your goals and build a strategy that delivers real results.</p>
       <div class="contact-links reveal reveal-d3">
+        <a href="https://wa.me/919711459192?text=Hi%20Rishabh%2C%20I%20want%20to%20hire%20you!" target="_blank" class="clink clink-wa">
+          <div class="clink-icon">💬</div>
+          <div><strong style="display:block;color:var(--paper)">WhatsApp Me</strong><span style="font-size:0.8rem">+91 97114 59192 — Hire Me</span></div>
+        </a>
+        <a href="tel:+919711459192" class="clink">
+          <div class="clink-icon">📞</div>
+          <div><strong style="display:block;color:var(--paper)">Call Me</strong><span style="font-size:0.8rem">+91 97114 59192</span></div>
+        </a>
         <a href="mailto:rishabhsingh200612@gmail.com" class="clink">
           <div class="clink-icon">📧</div>
           <span>rishabhsingh200612@gmail.com</span>
-        </a>
-        <a href="https://github.com/rishabhsingh200612-sketch" target="_blank" class="clink">
-          <div class="clink-icon">💼</div>
-          <span>GitHub Portfolio</span>
         </a>
         <a href="images/Rishab.pdf" download class="clink">
           <div class="clink-icon">📄</div>
@@ -771,6 +904,16 @@ footer{
 </footer>
 
 <script>
+// Hamburger menu
+function toggleMenu(){
+  document.getElementById('ham').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('ham').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
 // Custom cursor
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
