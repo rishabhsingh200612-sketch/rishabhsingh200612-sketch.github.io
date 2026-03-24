@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Put your HTML text here<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -8,526 +8,244 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --fire:#e8491e;
-  --fire2:#ff6b35;
-  --gold:#f5a623;
-  --ink:#0d0d0d;
-  --paper:#faf8f4;
-  --cream:#f0ece3;
-  --smoke:#1a1a1a;
-  --muted:#6b6560;
-  --card:#ffffff;
-  --border:#e8e3da;
+  --fire:#e8491e;--fire2:#ff6b35;--gold:#f5a623;
+  --ink:#0d0d0d;--paper:#faf8f4;--cream:#f0ece3;
+  --muted:#6b6560;--card:#ffffff;--border:#e8e3da;
   --grad:linear-gradient(135deg,#e8491e,#ff6b35,#f5a623);
 }
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:400;overflow-x:hidden;cursor:none}
 
-/* CUSTOM CURSOR */
-#cursor{position:fixed;width:12px;height:12px;background:var(--fire);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--fire);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.2s,height 0.2s,opacity 0.2s}
-body:hover #cursor{opacity:1}
+/* CURSOR */
+#cursor{position:fixed;width:12px;height:12px;background:var(--fire);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;left:-100px;top:-100px}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--fire);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,opacity 0.2s;left:-100px;top:-100px}
+@media(pointer:coarse){#cursor,#cursor-ring{display:none}body{cursor:auto}}
 
 /* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 5%;
-  background:rgba(250,248,244,0.88);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(250,248,244,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);min-height:64px}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;text-decoration:none;color:var(--ink);letter-spacing:-1px}
 .logo span{color:var(--fire)}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
 .nav-links a:hover{color:var(--fire)}
-.nav-hire{
-  background:var(--ink);color:var(--paper)!important;
-  padding:0.5rem 1.3rem;border-radius:100px;
-  transition:background 0.2s!important;
-}
-.nav-hire:hover{background:var(--fire)!important;color:#fff!important}
+.nav-hire{background:var(--ink);color:var(--paper)!important;padding:0.5rem 1.3rem;border-radius:100px;transition:background 0.2s!important}
+.nav-hire:hover{background:var(--fire)!important}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(250,248,244,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 5%;flex-direction:column;gap:0;z-index:150}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--ink);text-decoration:none;font-size:1.05rem;font-weight:600;padding:0.9rem 0;border-bottom:1px solid var(--border);transition:color 0.2s}
+.mobile-menu a:last-child{border-bottom:none;color:var(--fire)}
+.mobile-menu a:hover{color:var(--fire)}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.45);text-decoration:none;font-size:1.45rem;animation:wa-pop 2.5s ease-in-out infinite}
+.wa-float:hover{transform:scale(1.1)!important}
+@keyframes wa-pop{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
 /* HERO */
-#hero{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  padding:7rem 5% 4rem;
-  position:relative;
-  overflow:hidden;
-  gap:4rem;
-}
-.hero-noise{
-  position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none;opacity:0.4;
-}
-.hero-blob{
-  position:absolute;right:-10%;top:5%;
-  width:55vw;height:55vw;max-width:700px;max-height:700px;
-  background:radial-gradient(circle at 40% 40%,rgba(232,73,30,0.18),rgba(245,166,35,0.12),transparent 70%);
-  border-radius:60% 40% 70% 30%/50% 60% 40% 50%;
-  animation:blobmove 8s ease-in-out infinite alternate;
-  pointer-events:none;
-}
-@keyframes blobmove{
-  0%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%}
-  100%{border-radius:40% 60% 30% 70%/60% 40% 70% 30%}
-}
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 5% 4rem;position:relative;overflow:hidden;gap:3rem}
+.hero-blob{position:absolute;right:-10%;top:5%;width:55vw;height:55vw;max-width:700px;max-height:700px;background:radial-gradient(circle at 40% 40%,rgba(232,73,30,0.14),rgba(245,166,35,0.09),transparent 70%);border-radius:60% 40% 70% 30%/50% 60% 40% 50%;animation:blobmove 8s ease-in-out infinite alternate;pointer-events:none}
+@keyframes blobmove{0%{border-radius:60% 40% 70% 30%/50% 60% 40% 50%}100%{border-radius:40% 60% 30% 70%/60% 40% 70% 30%}}
 .hero-left{position:relative;z-index:2}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  font-size:0.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;
-  color:var(--fire);margin-bottom:1.5rem;
-  padding:0.4rem 1rem;background:rgba(232,73,30,0.08);
-  border:1px solid rgba(232,73,30,0.2);border-radius:100px;
-}
-.hero-eyebrow span{width:6px;height:6px;background:var(--fire);border-radius:50%;animation:pulse 1.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.7)}}
-h1.hero-name{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(3.5rem,7vw,6.5rem);
-  font-weight:800;
-  line-height:0.92;
-  letter-spacing:-3px;
-  color:var(--ink);
-  margin-bottom:2rem;
-}
-h1.hero-name .line2{
-  display:block;
-  -webkit-text-stroke:2px var(--ink);
-  color:transparent;
-}
-h1.hero-name .line3{
-  display:block;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero-desc{
-  font-size:1rem;color:var(--muted);line-height:1.8;
-  max-width:480px;margin-bottom:2.5rem;font-weight:300;
-}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--fire);margin-bottom:1.5rem;padding:0.4rem 1rem;background:rgba(232,73,30,0.08);border:1px solid rgba(232,73,30,0.2);border-radius:100px}
+.hero-eyebrow span{width:6px;height:6px;background:var(--fire);border-radius:50%;flex-shrink:0;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.6)}}
+h1.hero-name{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:800;line-height:0.92;letter-spacing:-3px;color:var(--ink);margin-bottom:1.8rem}
+h1.hero-name .line2{display:block;-webkit-text-stroke:2px var(--ink);color:transparent}
+h1.hero-name .line3{display:block;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.8;max-width:460px;margin-bottom:2rem;font-weight:300}
 .hero-desc strong{color:var(--ink);font-weight:600}
 .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
-.btn-fire{
-  background:var(--grad);color:#fff;
-  padding:0.85rem 2rem;border-radius:100px;
-  font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:600;
-  letter-spacing:0.5px;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;
-  box-shadow:0 8px 30px rgba(232,73,30,0.3);
-  transition:transform 0.2s,box-shadow 0.2s;
-}
-.btn-fire:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(232,73,30,0.4)}
-.btn-ghost{
-  color:var(--ink);text-decoration:none;
-  display:inline-flex;align-items:center;gap:0.5rem;
-  font-size:0.88rem;font-weight:600;
-  border-bottom:2px solid var(--ink);padding-bottom:2px;
-  transition:color 0.2s,border-color 0.2s;
-}
+.btn-fire{background:var(--grad);color:#fff;padding:0.85rem 2rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:0.5px;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;box-shadow:0 8px 28px rgba(232,73,30,0.3);transition:transform 0.2s,box-shadow 0.2s}
+.btn-fire:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(232,73,30,0.4)}
+.btn-ghost{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-size:0.88rem;font-weight:600;border-bottom:2px solid var(--ink);padding-bottom:2px;transition:color 0.2s,border-color 0.2s}
 .btn-ghost:hover{color:var(--fire);border-color:var(--fire)}
 
-/* FLOATING STATS */
-.hero-stats-float{
-  display:flex;flex-direction:row;gap:1rem;flex-wrap:wrap;justify-content:center;
-}
-.stat-orb{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:1.4rem 1.6rem;
-  text-align:center;
-  box-shadow:0 8px 32px rgba(0,0,0,0.07);
-  transition:transform 0.3s,box-shadow 0.3s;
-  flex:1;min-width:110px;
-}
-.stat-orb:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(232,73,30,0.15)}
-.orb-num{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.orb-label{font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:0.3rem}
+/* HERO RIGHT */
+.hero-right{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:2rem}
+.hero-photo-ring{width:280px;height:280px;border-radius:50%;background:var(--grad);padding:4px;box-shadow:0 20px 60px rgba(232,73,30,0.25);flex-shrink:0}
+.hero-photo{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:top center;display:block}
+.hero-photo-placeholder{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#2a1000,#4d2000);display:flex;align-items:center;justify-content:center;font-size:5rem}
+.hero-stats{display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;width:100%}
+.stat-orb{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.1rem 1.2rem;text-align:center;box-shadow:0 6px 22px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;flex:1;min-width:88px}
+.stat-orb:hover{transform:translateY(-5px);box-shadow:0 16px 38px rgba(232,73,30,0.13)}
+.orb-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.orb-label{font-size:0.65rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:0.3rem}
 
-/* SCROLL INDICATOR */
-.scroll-hint{
-  position:absolute;bottom:2.5rem;left:5%;
-  display:flex;align-items:center;gap:0.6rem;
-  font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
-}
-.scroll-line{width:40px;height:1px;background:var(--muted)}
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:2rem;left:5%;display:flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:36px;height:1px;background:var(--muted)}
 
 /* MARQUEE */
-.marquee-strip{
-  background:var(--ink);color:var(--paper);
-  padding:1rem 0;overflow:hidden;
-  display:flex;gap:0;white-space:nowrap;
-}
-.marquee-inner{
-  display:flex;gap:3rem;
-  animation:marquee 18s linear infinite;
-  white-space:nowrap;
-}
-.marquee-inner span{
-  font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  display:flex;align-items:center;gap:3rem;
-}
-.marquee-inner span::after{content:"✦";color:var(--gold);font-size:0.7rem}
+.marquee-strip{background:var(--ink);color:var(--paper);padding:0.9rem 0;overflow:hidden;display:flex;white-space:nowrap}
+.marquee-inner{display:flex;gap:3rem;animation:marquee 20s linear infinite;white-space:nowrap;flex-shrink:0}
+.marquee-inner span{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:3rem}
+.marquee-inner span::after{content:"✦";color:var(--gold);font-size:0.65rem}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* SECTIONS COMMON */
-section{padding:6rem 5%}
-.s-tag{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  font-size:0.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--fire);margin-bottom:1rem;
-}
-.s-tag::before{content:'';width:20px;height:2px;background:var(--fire)}
-h2.s-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(2.2rem,4.5vw,3.5rem);
-  font-weight:800;letter-spacing:-2px;line-height:1.05;
-  margin-bottom:1rem;
-}
+/* SECTIONS */
+section{padding:5rem 5%}
+.s-tag{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--fire);margin-bottom:1rem}
+.s-tag::before{content:'';width:20px;height:2px;background:var(--fire);flex-shrink:0}
+h2.s-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:0.8rem}
 h2.s-title em{font-style:italic;color:var(--fire)}
-.s-sub{color:var(--muted);font-size:0.95rem;line-height:1.8;max-width:520px;margin-bottom:3.5rem;font-weight:300}
+.s-sub{color:var(--muted);font-size:0.92rem;line-height:1.8;max-width:500px;margin-bottom:3rem;font-weight:300}
 
 /* ABOUT */
 #about{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
-.about-deco{
-  position:absolute;right:-5%;top:-10%;
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(232,73,30,0.12),transparent 65%);
-  pointer-events:none;
-}
+.about-deco{position:absolute;right:-5%;top:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(232,73,30,0.1),transparent 65%);pointer-events:none}
 #about .s-tag{color:var(--gold)}
 #about .s-tag::before{background:var(--gold)}
 #about h2.s-title{color:var(--paper)}
 #about h2.s-title em{color:var(--gold)}
-.about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:5rem;align-items:start}
-.about-text{font-size:1.05rem;line-height:1.9;color:rgba(250,248,244,0.75);font-weight:300}
+.about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:4rem;align-items:start}
+.about-text{font-size:1rem;line-height:1.9;color:rgba(250,248,244,0.72);font-weight:300}
 .about-text strong{color:var(--paper);font-weight:600}
-.about-text p+p{margin-top:1.2rem}
-.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:2rem}
-.skill-pill{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.1);
-  color:rgba(250,248,244,0.8);
-  padding:0.55rem 0.9rem;border-radius:100px;
-  font-size:0.78rem;font-weight:500;letter-spacing:0.3px;
-  transition:background 0.2s,border-color 0.2s,color 0.2s;
-  text-align:center;
-}
-.skill-pill:hover{background:rgba(232,73,30,0.2);border-color:rgba(232,73,30,0.4);color:var(--fire2)}
-.about-right{position:relative}
-.xp-card{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;padding:2rem;margin-bottom:1rem;
-  transition:background 0.2s;
-}
-.xp-card:hover{background:rgba(232,73,30,0.08);border-color:rgba(232,73,30,0.2)}
-.xp-year{font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem}
-.xp-role{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--paper);margin-bottom:0.3rem}
-.xp-company{font-size:0.85rem;color:rgba(250,248,244,0.5)}
+.about-text p+p{margin-top:1rem}
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:1.8rem}
+.skill-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(250,248,244,0.8);padding:0.5rem 0.85rem;border-radius:100px;font-size:0.76rem;font-weight:500;transition:all 0.2s;text-align:center}
+.skill-pill:hover{background:rgba(232,73,30,0.18);border-color:rgba(232,73,30,0.4);color:var(--fire2)}
+.xp-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:1.6rem;margin-bottom:1rem;transition:all 0.2s}
+.xp-card:hover{background:rgba(232,73,30,0.07);border-color:rgba(232,73,30,0.2)}
+.xp-year{font-size:0.7rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem}
+.xp-role{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--paper);margin-bottom:0.25rem}
+.xp-company{font-size:0.82rem;color:rgba(250,248,244,0.45)}
 
 /* SERVICES */
 #services{background:var(--cream)}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.svc-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:2.5rem;
-  position:relative;overflow:hidden;
-  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
-}
-.svc-card::before{
-  content:'';
-  position:absolute;inset:0;
-  background:var(--grad);
-  opacity:0;
-  transition:opacity 0.3s;
-  border-radius:24px;
-}
-.svc-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(232,73,30,0.15);border-color:var(--fire)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+.svc-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:2.2rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s}
+.svc-card::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity 0.3s;border-radius:22px}
+.svc-card:hover{transform:translateY(-7px);box-shadow:0 22px 55px rgba(232,73,30,0.14)}
 .svc-card:hover::before{opacity:1}
-.svc-card:hover .svc-num,.svc-card:hover .svc-title,.svc-card:hover .svc-desc,.svc-card:hover .svc-tags span{color:#fff!important;border-color:rgba(255,255,255,0.3)!important;background:rgba(255,255,255,0.1)!important}
+.svc-card:hover .svc-num,.svc-card:hover .svc-title,.svc-card:hover .svc-desc{color:#fff!important}
+.svc-card:hover .svc-tags span{color:#fff!important;border-color:rgba(255,255,255,0.3)!important;background:rgba(255,255,255,0.12)!important}
 .svc-inner{position:relative;z-index:2}
-.svc-num{
-  font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;
-  color:rgba(0,0,0,0.05);line-height:1;margin-bottom:0.5rem;
-  transition:color 0.3s;
-}
-.svc-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.8rem;transition:color 0.3s}
-.svc-desc{font-size:0.875rem;line-height:1.75;color:var(--muted);margin-bottom:1.5rem;transition:color 0.3s}
-.svc-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
-.svc-tags span{
-  font-size:0.7rem;font-weight:600;padding:0.25rem 0.7rem;
-  border:1px solid var(--border);border-radius:100px;color:var(--muted);
-  transition:all 0.3s;
-}
+.svc-num{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:rgba(0,0,0,0.05);line-height:1;margin-bottom:0.4rem;transition:color 0.3s}
+.svc-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:0.7rem;transition:color 0.3s}
+.svc-desc{font-size:0.85rem;line-height:1.72;color:var(--muted);margin-bottom:1.3rem;transition:color 0.3s}
+.svc-tags{display:flex;flex-wrap:wrap;gap:0.35rem}
+.svc-tags span{font-size:0.68rem;font-weight:600;padding:0.22rem 0.65rem;border:1px solid var(--border);border-radius:100px;color:var(--muted);transition:all 0.3s}
 
 /* WORK */
 #work{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
-.work-deco{
-  position:absolute;left:-5%;bottom:-10%;
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(245,166,35,0.1),transparent 65%);
-  pointer-events:none;
-}
+.work-deco{position:absolute;left:-5%;bottom:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(245,166,35,0.09),transparent 65%);pointer-events:none}
 #work .s-tag{color:var(--gold)}
 #work .s-tag::before{background:var(--gold)}
 #work h2.s-title{color:var(--paper)}
 #work h2.s-title em{color:var(--fire2)}
-#work .s-sub{color:rgba(250,248,244,0.55)}
-.work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-.work-card{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:24px;overflow:hidden;
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.work-card:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(0,0,0,0.5)}
-.work-thumb{
-  width:100%;aspect-ratio:16/9;
-  display:flex;align-items:center;justify-content:center;
-  font-size:3.5rem;
-  position:relative;overflow:hidden;
-}
+#work .s-sub{color:rgba(250,248,244,0.5)}
+.work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.3rem}
+.work-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:22px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s}
+.work-card:hover{transform:translateY(-7px);box-shadow:0 28px 65px rgba(0,0,0,0.5)}
+.work-thumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
 .work-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
-.work-card:hover .work-thumb img{transform:scale(1.05)}
+.work-card:hover .work-thumb img{transform:scale(1.06)}
 .thumb-bg-1{background:linear-gradient(135deg,#1a0a00,#3d1500)}
 .thumb-bg-2{background:linear-gradient(135deg,#000d1a,#00254d)}
 .thumb-bg-3{background:linear-gradient(135deg,#0a1a00,#1a3d00)}
-.work-body{padding:1.8rem}
-.work-cat{font-size:0.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
-.work-name{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;color:var(--paper);margin-bottom:0.6rem}
-.work-about{font-size:0.84rem;color:rgba(250,248,244,0.5);line-height:1.65;margin-bottom:1rem}
-.work-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
-.work-chip{font-size:0.68rem;font-weight:600;padding:0.2rem 0.65rem;background:rgba(255,255,255,0.07);color:rgba(250,248,244,0.6);border-radius:100px}
+.work-body{padding:1.6rem}
+.work-cat{font-size:0.66rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem}
+.work-name{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--paper);margin-bottom:0.5rem}
+.work-about{font-size:0.82rem;color:rgba(250,248,244,0.48);line-height:1.62;margin-bottom:0.9rem}
+.work-chips{display:flex;flex-wrap:wrap;gap:0.35rem}
+.work-chip{font-size:0.66rem;font-weight:600;padding:0.2rem 0.6rem;background:rgba(255,255,255,0.07);color:rgba(250,248,244,0.55);border-radius:100px}
 
-/* RESULTS */
+/* RESULTS & PROOF */
 #results{background:var(--paper);position:relative;overflow:hidden}
-.results-blobdeco{
-  position:absolute;right:-5%;top:10%;
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(232,73,30,0.07),transparent 65%);
-  pointer-events:none;
-}
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
-.result-card{
-  background:var(--card);
-  border:1.5px solid var(--border);
-  border-radius:24px;
-  overflow:hidden;
-  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
-}
-.result-card:hover{transform:translateY(-6px) rotate(-0.5deg);box-shadow:0 20px 50px rgba(232,73,30,0.1);border-color:var(--fire)}
-.result-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--cream)}
-.result-img-placeholder{
-  width:100%;aspect-ratio:4/3;
-  display:flex;align-items:center;justify-content:center;
-  font-size:2.5rem;
-  background:linear-gradient(135deg,var(--cream),#e8e0d0);
-}
-.result-body{padding:1.5rem}
-.result-big{
-  font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;
-  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;line-height:1;
-}
-.result-note{font-size:0.8rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;font-weight:400}
+.results-deco{position:absolute;right:-5%;top:10%;width:600px;height:600px;background:radial-gradient(circle,rgba(232,73,30,0.06),transparent 65%);pointer-events:none}
+#proof{background:var(--cream)}
+#proof .s-tag::before{background:var(--fire)}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+.result-card{background:var(--card);border:1.5px solid var(--border);border-radius:22px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s}
+.result-card:hover{transform:translateY(-5px) rotate(-0.4deg);box-shadow:0 18px 45px rgba(232,73,30,0.1);border-color:var(--fire)}
+#proof .result-card{background:var(--card)}
+.result-img-wrap{width:100%;aspect-ratio:4/3;position:relative;overflow:hidden;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.result-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.result-body{padding:1.3rem}
+.result-big{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.result-note{font-size:0.78rem;color:var(--muted);margin-top:0.35rem;line-height:1.5}
 
 /* CONTACT */
 #contact{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
-.contact-blob{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(245,166,35,0.07),rgba(232,73,30,0.06),transparent 65%);
-  pointer-events:none;
-}
+.contact-blob{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(245,166,35,0.07),rgba(232,73,30,0.05),transparent 65%);pointer-events:none}
 #contact .s-tag{color:var(--gold)}
 #contact .s-tag::before{background:var(--gold)}
 #contact h2.s-title{color:var(--paper)}
-.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
-.contact-left p{font-size:0.95rem;color:rgba(250,248,244,0.6);line-height:1.8;margin-bottom:2.5rem;font-weight:300}
-.contact-links{display:flex;flex-direction:column;gap:1rem}
-.clink{
-  display:flex;align-items:center;gap:1rem;
-  color:rgba(250,248,244,0.7);text-decoration:none;font-size:0.9rem;
-  padding:1rem 1.2rem;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:14px;
-  transition:all 0.2s;
-}
-.clink:hover{background:rgba(232,73,30,0.12);border-color:rgba(232,73,30,0.3);color:var(--paper)}
-.clink-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.cform{display:flex;flex-direction:column;gap:1.2rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.fgroup{display:flex;flex-direction:column;gap:0.5rem}
-.fgroup label{font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,248,244,0.5)}
-.fgroup input,.fgroup textarea,.fgroup select{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px;
-  color:var(--paper);
-  padding:0.85rem 1.1rem;
-  font-family:'Outfit',sans-serif;font-size:0.9rem;
-  outline:none;transition:border-color 0.2s,background 0.2s;
-  resize:vertical;
-}
-.fgroup input:focus,.fgroup textarea:focus{border-color:var(--fire);background:rgba(232,73,30,0.06)}
-.fgroup input::placeholder,.fgroup textarea::placeholder{color:rgba(250,248,244,0.25)}
-.fgroup textarea{min-height:120px}
-.btn-send{
-  background:var(--grad);color:#fff;
-  padding:1rem 2.5rem;border-radius:100px;
-  border:none;cursor:none;
-  font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:700;
-  letter-spacing:0.5px;
-  align-self:flex-start;
-  box-shadow:0 8px 30px rgba(232,73,30,0.3);
-  transition:transform 0.2s,box-shadow 0.2s;
-}
-.btn-send:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(232,73,30,0.45)}
+#contact h2.s-title em{color:var(--fire2)}
+.contact-inner{max-width:720px}
+.contact-intro{font-size:1rem;color:rgba(250,248,244,0.55);line-height:1.8;margin-bottom:2.5rem;font-weight:300}
+.contact-links{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.clink{display:flex;align-items:center;gap:1rem;color:rgba(250,248,244,0.7);text-decoration:none;font-size:0.88rem;padding:1.1rem 1.3rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;transition:all 0.2s}
+.clink:hover{background:rgba(232,73,30,0.1);border-color:rgba(232,73,30,0.3);color:var(--paper);transform:translateY(-3px)}
+.clink-wa:hover{background:rgba(37,211,102,0.1)!important;border-color:rgba(37,211,102,0.35)!important}
+.clink-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.clink-text strong{display:block;color:var(--paper);font-size:0.88rem;margin-bottom:0.12rem}
+.clink-text span{font-size:0.76rem;color:rgba(250,248,244,0.42)}
 
 /* FOOTER */
-footer{
-  background:var(--ink);
-  border-top:1px solid rgba(255,255,255,0.07);
-  padding:2rem 5%;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
-}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.2rem}
 .foot-logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--paper)}
 .foot-logo span{color:var(--fire)}
-.foot-copy{font-size:0.78rem;color:rgba(250,248,244,0.35)}
-.foot-socials{display:flex;gap:1rem}
-.foot-socials a{
-  width:36px;height:36px;
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(250,248,244,0.5);text-decoration:none;
-  transition:all 0.2s;
-}
+.foot-copy{font-size:0.74rem;color:rgba(250,248,244,0.28)}
+.foot-socials{display:flex;gap:0.8rem}
+.foot-socials a{width:36px;height:36px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:rgba(250,248,244,0.45);text-decoration:none;transition:all 0.2s}
 .foot-socials a:hover{background:var(--fire);border-color:var(--fire);color:#fff}
 
-/* FADE IN ANIMATIONS */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
-.reveal-d1{transition-delay:0.1s}
-.reveal-d2{transition-delay:0.2s}
-.reveal-d3{transition-delay:0.3s}
-.reveal-d4{transition-delay:0.4s}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
 
-/* DECORATIVE LINE */
-.deco-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
-
-/* WHATSAPP FLOAT */
-.wa-float{
-  position:fixed;bottom:2rem;right:2rem;z-index:999;
-  width:58px;height:58px;
-  background:#25D366;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 24px rgba(37,211,102,0.45);
-  text-decoration:none;font-size:1.6rem;
-  transition:transform 0.2s,box-shadow 0.2s;
-  animation:wa-bounce 2s ease-in-out infinite;
-}
-.wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,0.6)}
-@keyframes wa-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-/* HAMBURGER */
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.hamburger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.3s}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{
-  display:none;position:fixed;top:64px;left:0;right:0;
-  background:rgba(250,248,244,0.97);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:1.5rem 5%;flex-direction:column;gap:1.2rem;z-index:99;
-}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:var(--ink);text-decoration:none;font-size:1rem;font-weight:600;letter-spacing:0.5px;padding:0.5rem 0;border-bottom:1px solid var(--border)}
-.mobile-menu a:last-child{border-bottom:none;color:var(--fire)}
-
-/* HERO PROFILE IMAGE */
-.hero-photo-wrap{
-  position:relative;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:1.5rem;
-}
-.hero-photo-ring{
-  width:260px;height:260px;
-  border-radius:50%;
-  background:var(--grad);
-  padding:4px;
-  box-shadow:0 20px 60px rgba(232,73,30,0.3);
-  flex-shrink:0;
-}
-.hero-photo{
-  width:100%;height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  display:block;
-  background:linear-gradient(135deg,#1a0a00,#3d1500);
-}
-.hero-photo-placeholder{
-  width:100%;height:100%;
-  border-radius:50%;
-  background:linear-gradient(135deg,#2a1000,#4d2000);
-  display:flex;align-items:center;justify-content:center;
-  font-size:5rem;
-}
-
-/* CLINK WA */
-.clink-wa{border-color:rgba(37,211,102,0.3)!important}
-.clink-wa:hover{background:rgba(37,211,102,0.12)!important;border-color:rgba(37,211,102,0.5)!important}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  #hero{grid-template-columns:1fr;padding:6rem 5% 3rem;text-align:center}
+/* === RESPONSIVE === */
+@media(max-width:1024px){.hero-photo-ring{width:240px;height:240px}.about-grid{gap:3rem}}
+@media(max-width:860px){
+  #hero{grid-template-columns:1fr;padding:6.5rem 5% 4rem;text-align:center;gap:2.5rem}
   .hero-left{display:flex;flex-direction:column;align-items:center}
-  .hero-eyebrow,.hero-desc,.hero-actions{text-align:center}
+  .hero-desc{text-align:center}
   .hero-actions{justify-content:center}
-  .hero-stats-float{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:1rem}
-  .stat-orb:nth-child(2),.stat-orb:nth-child(3){transform:none}
+  .hero-right{order:-1}
   .hero-photo-ring{width:200px;height:200px}
-  .about-grid,.contact-wrap{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
   .scroll-hint{display:none}
-  .skills-wrap{grid-template-columns:1fr 1fr 1fr}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .skills-wrap{grid-template-columns:repeat(3,1fr)}
+  .contact-links{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .nav-links{display:none}
   .hamburger{display:flex}
-  h1.hero-name{letter-spacing:-2px;font-size:clamp(3rem,15vw,5rem)}
-  .stat-orb{width:calc(50% - 0.5rem);padding:1.2rem 1rem}
-  .orb-num{font-size:2rem}
-  .hero-photo-ring{width:170px;height:170px}
-  section{padding:4rem 5%}
-  .services-grid{grid-template-columns:1fr}
-  .work-grid{grid-template-columns:1fr}
+  nav{padding:1rem 5%}
+  h1.hero-name{font-size:clamp(2.8rem,14vw,4.5rem);letter-spacing:-2px}
+  .hero-photo-ring{width:165px;height:165px}
+  .hero-stats{gap:0.6rem}
+  .stat-orb{padding:0.9rem 0.7rem}
+  .orb-num{font-size:1.8rem}
+  .orb-label{font-size:0.58rem}
+  section{padding:3.5rem 5%}
+  h2.s-title{font-size:1.85rem;letter-spacing:-1px}
+  .services-grid,.work-grid{grid-template-columns:1fr}
   .results-grid{grid-template-columns:1fr 1fr}
-  .contact-wrap{gap:3rem}
   .skills-wrap{grid-template-columns:1fr 1fr}
-  h2.s-title{font-size:2rem;letter-spacing:-1px}
-  footer{flex-direction:column;text-align:center;gap:1.2rem}
+  footer{flex-direction:column;text-align:center}
+  .contact-links{grid-template-columns:1fr}
 }
-@media(max-width:400px){
+@media(max-width:380px){
   .results-grid{grid-template-columns:1fr}
-  .stat-orb{width:100%}
+  h1.hero-name{font-size:2.5rem}
+  .hero-photo-ring{width:145px;height:145px}
 }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
@@ -546,7 +264,7 @@ footer{
   </button>
 </nav>
 
-<!-- Mobile Menu -->
+<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#services" onclick="closeMenu()">Services</a>
@@ -555,12 +273,12 @@ footer{
   <a href="#contact" onclick="closeMenu()">Hire Me →</a>
 </div>
 
-<!-- WhatsApp Float Button -->
+<!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/919711459192?text=Hi%20Rishabh%2C%20I%20want%20to%20hire%20you!" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+<!-- HERO -->
 <section id="hero">
   <div class="hero-blob"></div>
-  <div class="hero-noise"></div>
-
   <div class="hero-left">
     <div class="hero-eyebrow reveal"><span></span>Digital Marketing Expert</div>
     <h1 class="hero-name reveal reveal-d1">
@@ -569,50 +287,36 @@ footer{
       <span class="line3">MARKETER</span>
     </h1>
     <p class="hero-desc reveal reveal-d2">
-      I help brands <strong>grow faster</strong> through <strong>Facebook Ads, Google Ads</strong> & performance marketing. Results-driven campaigns that actually convert.
+      I help brands <strong>grow faster</strong> through <strong>Facebook Ads, Google Ads</strong> &amp; performance marketing. Results-driven campaigns that actually convert.
     </p>
     <div class="hero-actions reveal reveal-d3">
       <a href="#work" class="btn-fire">View My Work →</a>
       <a href="images/Rishab.pdf" download class="btn-ghost">Download CV</a>
     </div>
   </div>
-
-  <div class="hero-photo-wrap reveal reveal-d2">
+  <div class="hero-right reveal reveal-d2">
     <div class="hero-photo-ring">
       <img src="images/WhatsApp Image 2025-12-11 at 10.48.44 AM.jpeg" class="hero-photo" alt="Rishabh Singh" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
       <div class="hero-photo-placeholder" style="display:none">👨‍💼</div>
     </div>
-    <div class="hero-stats-float">
-      <div class="stat-orb">
-        <div class="orb-num">3+</div>
-        <div class="orb-label">Years Exp.</div>
-      </div>
-      <div class="stat-orb">
-        <div class="orb-num">20+</div>
-        <div class="orb-label">Clients</div>
-      </div>
-      <div class="stat-orb">
-        <div class="orb-num">₹50L+</div>
-        <div class="orb-label">Ad Spend</div>
-      </div>
+    <div class="hero-stats">
+      <div class="stat-orb"><div class="orb-num">1+</div><div class="orb-label">Years Exp.</div></div>
+      <div class="stat-orb"><div class="orb-num">20+</div><div class="orb-label">Clients</div></div>
+      <div class="stat-orb"><div class="orb-num">₹2L+</div><div class="orb-label">Ad Spend</div></div>
     </div>
   </div>
-
-  <div class="scroll-hint reveal reveal-d4">
-    <span class="scroll-line"></span>
-    Scroll Down
-  </div>
+  <div class="scroll-hint"><span class="scroll-line"></span>Scroll Down</div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-strip">
+<div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
     <span>Facebook Ads</span><span>Google Ads</span><span>Lead Generation</span>
     <span>Performance Marketing</span><span>Meta Ads</span><span>PPC Expert</span>
-    <span>ROAS Optimization</span><span>Social Media Marketing</span>
+    <span>WordPress Developer</span><span>Social Media Marketing</span>
     <span>Facebook Ads</span><span>Google Ads</span><span>Lead Generation</span>
     <span>Performance Marketing</span><span>Meta Ads</span><span>PPC Expert</span>
-    <span>ROAS Optimization</span><span>Social Media Marketing</span>
+    <span>WordPress Developer</span><span>Social Media Marketing</span>
   </div>
 </div>
 
@@ -624,9 +328,9 @@ footer{
       <div class="s-tag reveal">About Me</div>
       <h2 class="s-title reveal reveal-d1">I Turn Ad Spend Into<br><em>Real Results</em></h2>
       <div class="about-text reveal reveal-d2">
-        <p>Hi, I'm <strong>Rishabh Singh</strong> — a passionate Digital Marketer specializing in <strong>paid advertising</strong> that actually delivers measurable ROI.</p>
-        <p>With 3+ years of hands-on experience managing campaigns across <strong>Facebook, Instagram, and Google</strong>, I've helped businesses in real estate, matrimony, and religious organizations scale their customer acquisition at lower cost-per-lead.</p>
-        <p>I don't just run ads — I build <strong>complete marketing funnels</strong> that convert strangers into paying customers.</p>
+        <p>Hi, I'm <strong>Rishabh Singh</strong> — a passionate Digital Marketer specializing in <strong>paid advertising</strong> that delivers measurable ROI.</p>
+        <p>With hands-on experience managing campaigns across <strong>Facebook, Instagram, and Google</strong>, I've helped businesses in real estate, matrimony, and social media grow their customer base at a lower cost-per-lead.</p>
+        <p>I also build <strong>WordPress websites</strong> — fast, mobile-friendly, and SEO-ready. I don't just run ads, I build <strong>complete marketing funnels</strong> that convert visitors into paying customers.</p>
       </div>
       <div class="skills-wrap reveal reveal-d3">
         <div class="skill-pill">Facebook Ads</div>
@@ -636,28 +340,23 @@ footer{
         <div class="skill-pill">Lead Generation</div>
         <div class="skill-pill">Funnel Building</div>
         <div class="skill-pill">A/B Testing</div>
-        <div class="skill-pill">ROAS Optimization</div>
         <div class="skill-pill">Retargeting</div>
         <div class="skill-pill">Copywriting</div>
-        <div class="skill-pill">WordPress Development</div>
-        <div class="skill-pill">Website Building</div>
+        <div class="skill-pill">WordPress Dev</div>
+        <div class="skill-pill">SEO Basics</div>
+        <div class="skill-pill">ROAS Optimization</div>
       </div>
     </div>
     <div class="about-right reveal reveal-d2">
       <div class="xp-card">
-        <div class="xp-year">2023 — Present</div>
-        <div class="xp-role">Senior Performance Marketer</div>
-        <div class="xp-company">Freelance — Multiple Clients</div>
+        <div class="xp-year">2024 — 2025</div>
+        <div class="xp-role">Digital Marketing Intern</div>
+        <div class="xp-company">Malik Enterprises</div>
       </div>
       <div class="xp-card">
-        <div class="xp-year">2022 — 2023</div>
+        <div class="xp-year">2025 — Present</div>
         <div class="xp-role">Digital Marketing Specialist</div>
-        <div class="xp-company">Real Estate & Matrimony Sector</div>
-      </div>
-      <div class="xp-card">
-        <div class="xp-year">2021 — 2022</div>
-        <div class="xp-role">Paid Ads Executive</div>
-        <div class="xp-company">Social Media Agency</div>
+        <div class="xp-company">Real Estate, Matrimony &amp; Social Media</div>
       </div>
     </div>
   </div>
@@ -667,12 +366,12 @@ footer{
 <section id="services">
   <div class="s-tag reveal">What I Do</div>
   <h2 class="s-title reveal reveal-d1">Services That <em>Drive Growth</em></h2>
-  <p class="s-sub reveal reveal-d2">Every service is designed to bring measurable returns on your marketing investment.</p>
+  <p class="s-sub reveal reveal-d2">Every service is built to bring measurable returns on your marketing investment.</p>
   <div class="services-grid">
     <div class="svc-card reveal reveal-d1">
       <div class="svc-inner">
         <div class="svc-num">01</div>
-        <div class="svc-title">Facebook & Instagram Ads</div>
+        <div class="svc-title">Facebook &amp; Instagram Ads</div>
         <div class="svc-desc">Full-funnel Meta campaigns — from awareness to conversions. Precise audience targeting, creative testing, and relentless optimization for lowest CPL.</div>
         <div class="svc-tags"><span>Lead Gen</span><span>Retargeting</span><span>Lookalike</span><span>Conversion</span></div>
       </div>
@@ -680,7 +379,7 @@ footer{
     <div class="svc-card reveal reveal-d2">
       <div class="svc-inner">
         <div class="svc-num">02</div>
-        <div class="svc-title">Google Ads & PPC</div>
+        <div class="svc-title">Google Ads &amp; PPC</div>
         <div class="svc-desc">Search, Display, and Performance Max campaigns that capture high-intent buyers. Keyword research, Quality Score optimization, and smart bidding strategies.</div>
         <div class="svc-tags"><span>Search Ads</span><span>Display</span><span>PMax</span><span>Shopping</span></div>
       </div>
@@ -693,15 +392,15 @@ footer{
         <div class="svc-tags"><span>Landing Pages</span><span>CRM</span><span>Nurturing</span></div>
       </div>
     </div>
-    <div class="svc-card reveal reveal-d4">
+    <div class="svc-card reveal reveal-d1">
       <div class="svc-inner">
         <div class="svc-num">04</div>
-        <div class="svc-title">Campaign Audit & Strategy</div>
+        <div class="svc-title">Campaign Audit &amp; Strategy</div>
         <div class="svc-desc">Deep-dive audit of your existing ad accounts. Identify wasted spend, missed opportunities, and a clear roadmap to scale your best-performing campaigns.</div>
         <div class="svc-tags"><span>Audit</span><span>Strategy</span><span>Scaling</span></div>
       </div>
     </div>
-    <div class="svc-card reveal reveal-d4">
+    <div class="svc-card reveal reveal-d2">
       <div class="svc-inner">
         <div class="svc-num">05</div>
         <div class="svc-title">WordPress Website Development</div>
@@ -712,8 +411,6 @@ footer{
   </div>
 </section>
 
-<div class="deco-line"></div>
-
 <!-- WORK -->
 <section id="work">
   <div class="work-deco"></div>
@@ -721,116 +418,130 @@ footer{
   <h2 class="s-title reveal reveal-d1">Featured <em>Work</em></h2>
   <p class="s-sub reveal reveal-d2">Real campaigns, real results. A look at the brands I've helped grow.</p>
   <div class="work-grid">
-
     <div class="work-card reveal reveal-d1">
       <div class="work-thumb thumb-bg-1">
-        <img src="images/shanimandir.png" alt="Shani Mandir" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"/>
+        <img src="images/shanimandir.png" alt="Shani Mandir Alipur" onerror="this.style.display='none'"/>
         <span>🕉️</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Religious / Social Media</div>
         <div class="work-name">Shani Mandir Alipur</div>
-        <div class="work-about">Digital outreach and social media marketing for the renowned Shani Mandir Alipur. Event promotion, devotee awareness, and targeted Facebook campaigns.</div>
+        <div class="work-about">Digital outreach and social media marketing for Shani Mandir Alipur. Event promotion, devotee awareness, and targeted Facebook campaigns.</div>
         <div class="work-chips"><span class="work-chip">Facebook Ads</span><span class="work-chip">Instagram</span><span class="work-chip">Brand Awareness</span></div>
       </div>
     </div>
-
     <div class="work-card reveal reveal-d2">
       <div class="work-thumb thumb-bg-2">
-        <img src="images/matrimonialtoday.png" alt="Matrimonial Today" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"/>
+        <img src="images/matrimonialtoday.png" alt="Matrimonial Today" onerror="this.style.display='none'"/>
         <span>💍</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Matrimony / Lead Generation</div>
         <div class="work-name">Matrimonial Today</div>
-        <div class="work-about">Lead generation and user acquisition campaigns for MatrimonialToday.com. Scaled profile registrations at a low cost-per-lead using Facebook and Google Ads.</div>
+        <div class="work-about">Lead generation campaigns for MatrimonialToday.com — scaled profile registrations at a low cost-per-lead using Facebook and Google Ads.</div>
         <div class="work-chips"><span class="work-chip">Lead Gen</span><span class="work-chip">Google Ads</span><span class="work-chip">Low CPL</span></div>
       </div>
     </div>
-
     <div class="work-card reveal reveal-d3">
       <div class="work-thumb thumb-bg-3">
-        <img src="images/plotland.png" alt="Real Estate" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"/>
+        <img src="images/plotland.png" alt="Real Estate Campaign" onerror="this.style.display='none'"/>
         <span>🏘️</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Real Estate / Performance</div>
-        <div class="work-name">Plot & Land Campaign</div>
-        <div class="work-about">Geo-targeted Facebook and Google Ads for real estate developers. Captured high-intent buyers and generated qualified property enquiries.</div>
+        <div class="work-name">Plot &amp; Land Campaign</div>
+        <div class="work-about">Geo-targeted Facebook and Google Ads for real estate developers — captured high-intent buyers and generated qualified property enquiries.</div>
         <div class="work-chips"><span class="work-chip">Geo Targeting</span><span class="work-chip">Facebook Ads</span><span class="work-chip">Real Estate</span></div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- RESULTS -->
 <section id="results">
-  <div class="results-blobdeco"></div>
+  <div class="results-deco"></div>
   <div class="s-tag reveal">Proof of Work</div>
   <h2 class="s-title reveal reveal-d1">Numbers That <em>Speak</em></h2>
   <p class="s-sub reveal reveal-d2">Real campaign screenshots and metrics from actual client work.</p>
   <div class="results-grid">
-
     <div class="result-card reveal reveal-d1">
-      <img src="images/result1.jpg" class="result-img" alt="Result 1" onerror="this.style.display='none'"/>
-      <div class="result-img-placeholder" style="display:none">📊</div>
+      <div class="result-img-wrap">
+        <img src="images/result1.jpg" alt="CPL Result" onerror="this.style.display='none'"/>
+        <span>📊</span>
+      </div>
       <div class="result-body">
         <div class="result-big">↓ CPL</div>
-        <div class="result-note">Cost-Per-Lead Reduced Significantly — Facebook Lead Campaign</div>
+        <div class="result-note">Cost-Per-Lead Reduced — Facebook Lead Campaign</div>
       </div>
     </div>
-
     <div class="result-card reveal reveal-d2">
-      <img src="images/result2.jpg" class="result-img" alt="Result 2" onerror="this.style.display='none'"/>
-      <div class="result-img-placeholder" style="display:none">📈</div>
+      <div class="result-img-wrap">
+        <img src="images/result2.jpg" alt="ROAS Result" onerror="this.style.display='none'"/>
+        <span>📈</span>
+      </div>
       <div class="result-body">
         <div class="result-big">↑ ROAS</div>
-        <div class="result-note">Return on Ad Spend Above Target — Google Performance Max</div>
+        <div class="result-note">Return on Ad Spend Above Target — Google PMax</div>
       </div>
     </div>
-
     <div class="result-card reveal reveal-d3">
-      <img src="images/result3.jpg" class="result-img" alt="Result 3" onerror="this.style.display='none'"/>
-      <div class="result-img-placeholder" style="display:none">🎯</div>
+      <div class="result-img-wrap">
+        <img src="images/result3.jpg" alt="CTR Result" onerror="this.style.display='none'"/>
+        <span>🎯</span>
+      </div>
       <div class="result-body">
         <div class="result-big">↑ CTR</div>
-        <div class="result-note">Above-Average Click-Through Rate — Google Search Campaign</div>
+        <div class="result-note">Above-Average Click-Through Rate — Google Search</div>
       </div>
     </div>
-
     <div class="result-card reveal reveal-d4">
-      <img src="images/google1.png" class="result-img" alt="Google Ads Result" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="result-img-placeholder" style="display:none">💰</div>
+      <div class="result-img-wrap">
+        <img src="images/google1.png" alt="Ad Spend" onerror="this.style.display='none'"/>
+        <span>💰</span>
+      </div>
       <div class="result-body">
-        <div class="result-big">₹50L+</div>
+        <div class="result-big">₹2L+</div>
         <div class="result-note">Total Ad Spend Managed Across All Client Accounts</div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- GOOGLE ADS PROOF -->
-<section style="background:var(--cream);padding:4rem 5%">
-  <div class="s-tag reveal">Google Ads Screenshots</div>
-  <h2 class="s-title reveal reveal-d1">Campaign <em>Proof</em></h2>
-  <p class="s-sub reveal reveal-d2">Real Google Ads dashboard screenshots from live campaigns.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+<section id="proof">
+  <div class="s-tag reveal">Live Campaign Screenshots</div>
+  <h2 class="s-title reveal reveal-d1">Google Ads <em>Proof</em></h2>
+  <p class="s-sub reveal reveal-d2">Real Google Ads dashboard screenshots from live campaigns I have managed.</p>
+  <div class="results-grid">
     <div class="result-card reveal reveal-d1">
-      <img src="images/google1.png" class="result-img" alt="Google Ads Campaign 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="result-img-placeholder" style="display:none">📊</div>
-      <div class="result-body"><div class="result-big">Google Ads</div><div class="result-note">Search Campaign Performance Dashboard</div></div>
+      <div class="result-img-wrap">
+        <img src="images/google1.png" alt="Google Ads Screenshot 1" onerror="this.style.display='none'"/>
+        <span>📊</span>
+      </div>
+      <div class="result-body">
+        <div class="result-big">Google Ads</div>
+        <div class="result-note">Search Campaign Performance Dashboard</div>
+      </div>
     </div>
     <div class="result-card reveal reveal-d2">
-      <img src="images/google2.png" class="result-img" alt="Google Ads Campaign 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="result-img-placeholder" style="display:none">📈</div>
-      <div class="result-body"><div class="result-big">Google Ads</div><div class="result-note">Conversion Tracking & ROAS Report</div></div>
+      <div class="result-img-wrap">
+        <img src="images/google2.png" alt="Google Ads Screenshot 2" onerror="this.style.display='none'"/>
+        <span>📈</span>
+      </div>
+      <div class="result-body">
+        <div class="result-big">Google Ads</div>
+        <div class="result-note">Conversion Tracking &amp; ROAS Report</div>
+      </div>
     </div>
     <div class="result-card reveal reveal-d3">
-      <img src="images/google3.png" class="result-img" alt="Google Ads Campaign 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="result-img-placeholder" style="display:none">🎯</div>
-      <div class="result-body"><div class="result-big">Google Ads</div><div class="result-note">Keyword Performance & Quality Score</div></div>
+      <div class="result-img-wrap">
+        <img src="images/google3.png" alt="Google Ads Screenshot 3" onerror="this.style.display='none'"/>
+        <span>🎯</span>
+      </div>
+      <div class="result-body">
+        <div class="result-big">Google Ads</div>
+        <div class="result-note">Keyword Performance &amp; Quality Score</div>
+      </div>
     </div>
   </div>
 </section>
@@ -838,53 +549,27 @@ footer{
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-blob"></div>
-  <div class="contact-wrap">
-    <div class="contact-left">
-      <div class="s-tag reveal">Get In Touch</div>
-      <h2 class="s-title reveal reveal-d1">Let's Build Something <em>Together.</em></h2>
-      <p class="reveal reveal-d2">Ready to scale your brand with high-performance advertising? Let's talk about your goals and build a strategy that delivers real results.</p>
-      <div class="contact-links reveal reveal-d3">
-        <a href="https://wa.me/919711459192?text=Hi%20Rishabh%2C%20I%20want%20to%20hire%20you!" target="_blank" class="clink clink-wa">
-          <div class="clink-icon">💬</div>
-          <div><strong style="display:block;color:var(--paper)">WhatsApp Me</strong><span style="font-size:0.8rem">+91 97114 59192 — Hire Me</span></div>
-        </a>
-        <a href="tel:+919711459192" class="clink">
-          <div class="clink-icon">📞</div>
-          <div><strong style="display:block;color:var(--paper)">Call Me</strong><span style="font-size:0.8rem">+91 97114 59192</span></div>
-        </a>
-        <a href="mailto:rishabhsingh200612@gmail.com" class="clink">
-          <div class="clink-icon">📧</div>
-          <span>rishabhsingh200612@gmail.com</span>
-        </a>
-        <a href="images/Rishab.pdf" download class="clink">
-          <div class="clink-icon">📄</div>
-          <span>Download Resume (PDF)</span>
-        </a>
-      </div>
-    </div>
-    <div>
-      <form class="cform" onsubmit="sendMsg(event)">
-        <div class="form-row">
-          <div class="fgroup">
-            <label>Your Name</label>
-            <input type="text" placeholder="John Doe" required/>
-          </div>
-          <div class="fgroup">
-            <label>Email</label>
-            <input type="email" placeholder="john@company.com" required/>
-          </div>
-        </div>
-        <div class="fgroup">
-          <label>Service Needed</label>
-          <input type="text" placeholder="Facebook Ads, Google Ads, Lead Generation..."/>
-        </div>
-        <div class="fgroup">
-          <label>Your Message</label>
-          <textarea placeholder="Tell me about your business goals and budget..."></textarea>
-        </div>
-        <button type="submit" class="btn-send">Send Message →</button>
-        <div id="success-msg" style="display:none;color:#4caf50;font-size:0.85rem;margin-top:0.5rem;font-weight:600">✅ Sent! I'll get back to you soon.</div>
-      </form>
+  <div class="contact-inner">
+    <div class="s-tag reveal">Get In Touch</div>
+    <h2 class="s-title reveal reveal-d1">Let's Build Something <em>Together.</em></h2>
+    <p class="contact-intro reveal reveal-d2">Ready to scale your brand with high-performance advertising? Reach out — let's talk about your goals and build a strategy that delivers real results.</p>
+    <div class="contact-links reveal reveal-d3">
+      <a href="https://wa.me/919711459192?text=Hi%20Rishabh%2C%20I%20want%20to%20hire%20you!" target="_blank" class="clink clink-wa">
+        <div class="clink-icon">💬</div>
+        <div class="clink-text"><strong>WhatsApp Me</strong><span>+91 97114 59192 — Hire Me</span></div>
+      </a>
+      <a href="tel:+919711459192" class="clink">
+        <div class="clink-icon">📞</div>
+        <div class="clink-text"><strong>Call Me</strong><span>+91 97114 59192</span></div>
+      </a>
+      <a href="mailto:rishabhsingh200612@gmail.com" class="clink">
+        <div class="clink-icon">📧</div>
+        <div class="clink-text"><strong>Email Me</strong><span>rishabhsingh200612@gmail.com</span></div>
+      </a>
+      <a href="images/Rishab.pdf" download class="clink">
+        <div class="clink-icon">📄</div>
+        <div class="clink-text"><strong>Download Resume</strong><span>PDF — Rishabh Singh CV</span></div>
+      </a>
     </div>
   </div>
 </section>
@@ -892,10 +577,13 @@ footer{
 <!-- FOOTER -->
 <footer>
   <div class="foot-logo">RS<span>.</span></div>
-  <div class="foot-copy">© 2025 Rishabh Singh — Digital Marketer</div>
+  <div class="foot-copy">© 2025 Rishabh Singh — Digital Marketer &amp; WordPress Developer</div>
   <div class="foot-socials">
     <a href="https://github.com/rishabhsingh200612-sketch" target="_blank" title="GitHub">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.1.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+    <a href="https://wa.me/919711459192" target="_blank" title="WhatsApp">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
     <a href="mailto:rishabhsingh200612@gmail.com" title="Email">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -904,7 +592,7 @@ footer{
 </footer>
 
 <script>
-// Hamburger menu
+// Hamburger
 function toggleMenu(){
   document.getElementById('ham').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
@@ -913,50 +601,36 @@ function closeMenu(){
   document.getElementById('ham').classList.remove('open');
   document.getElementById('mobileMenu').classList.remove('open');
 }
-
-// Custom cursor
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let rx=0,ry=0,cx=0,cy=0;
-document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;cur.style.left=cx+'px';cur.style.top=cy+'px'});
-(function animRing(){rx+=(cx-rx)*0.12;ry+=(cy-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
-document.querySelectorAll('a,button,.svc-card,.work-card,.result-card,.stat-orb').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';ring.style.width='54px';ring.style.height='54px';ring.style.opacity='0.6'});
-  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='1'});
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const ham=document.getElementById('ham');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!ham.contains(e.target))closeMenu();
 });
+
+// Custom cursor (desktop only)
+if(window.matchMedia('(pointer:fine)').matches){
+  const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+  let rx=0,ry=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;cur.style.left=cx+'px';cur.style.top=cy+'px'});
+  (function loop(){rx+=(cx-rx)*0.12;ry+=(cy-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.querySelectorAll('a,button,.svc-card,.work-card,.result-card,.stat-orb').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';ring.style.width='52px';ring.style.height='52px';ring.style.opacity='0.5'});
+    el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='1'});
+  });
+}
 
 // Scroll reveal
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})
-},{threshold:0.1});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// Result image fallback
-document.querySelectorAll('.result-card').forEach(card=>{
-  const img=card.querySelector('.result-img');
-  const ph=card.querySelector('.result-img-placeholder');
-  if(img&&ph){img.addEventListener('error',()=>{img.style.display='none';ph.style.display='flex'})}
-});
-
-// Form
-function sendMsg(e){
-  e.preventDefault();
-  document.getElementById('success-msg').style.display='block';
-  e.target.reset();
-  setTimeout(()=>document.getElementById('success-msg').style.display='none',4000);
-}
 
 // Active nav
 const secs=document.querySelectorAll('section[id]');
 const nlinks=document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{
   let curr='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-150)curr=s.id});
-  nlinks.forEach(a=>{
-    const active=a.getAttribute('href')==='#'+curr;
-    a.style.color=active?'var(--fire)':'';
-  });
-});
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-160)curr=s.id});
+  nlinks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+curr?'var(--fire)':''});
+},{passive:true});
 </script>
 </body>
 </html>
