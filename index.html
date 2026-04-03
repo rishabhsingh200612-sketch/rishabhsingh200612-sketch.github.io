@@ -135,7 +135,7 @@ h2.s-title em{font-style:italic;color:var(--fire)}
 .svc-tags{display:flex;flex-wrap:wrap;gap:0.35rem}
 .svc-tags span{font-size:0.68rem;font-weight:600;padding:0.22rem 0.65rem;border:1px solid var(--border);border-radius:100px;color:var(--muted);transition:all 0.3s}
 
-/* WORK */
+/* ===== WORK SECTION - CLICKABLE CARDS ===== */
 #work{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
 .work-deco{position:absolute;left:-5%;bottom:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(245,166,35,0.09),transparent 65%);pointer-events:none}
 #work .s-tag{color:var(--gold)}
@@ -144,11 +144,62 @@ h2.s-title em{font-style:italic;color:var(--fire)}
 #work h2.s-title em{color:var(--fire2)}
 #work .s-sub{color:rgba(250,248,244,0.5)}
 .work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.3rem}
-.work-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:22px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s}
-.work-card:hover{transform:translateY(-7px);box-shadow:0 28px 65px rgba(0,0,0,0.5)}
+
+/* Work card as clickable link */
+.work-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:22px;
+  overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  display:block;
+  text-decoration:none;
+  cursor:pointer;
+  position:relative;
+}
+.work-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 28px 65px rgba(0,0,0,0.5);
+  border-color:rgba(232,73,30,0.4);
+}
+
+/* Visit overlay on hover */
+.work-card::after{
+  content:'Visit Website ↗';
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.8);
+  background:var(--grad);
+  color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:0.82rem;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:0.65rem 1.4rem;
+  border-radius:100px;
+  opacity:0;
+  transition:all 0.3s;
+  z-index:10;
+  white-space:nowrap;
+  box-shadow:0 8px 28px rgba(232,73,30,0.4);
+}
+.work-card:hover::after{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+
 .work-thumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
-.work-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.work-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 0.5s}
 .work-card:hover .work-thumb img{transform:scale(1.06)}
+.work-thumb-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0);
+  transition:background 0.3s;
+  z-index:5;
+}
+.work-card:hover .work-thumb-overlay{background:rgba(0,0,0,0.45)}
+
 .thumb-bg-1{background:linear-gradient(135deg,#1a0a00,#3d1500)}
 .thumb-bg-2{background:linear-gradient(135deg,#000d1a,#00254d)}
 .thumb-bg-3{background:linear-gradient(135deg,#0a1a00,#1a3d00)}
@@ -159,7 +210,17 @@ h2.s-title em{font-style:italic;color:var(--fire)}
 .work-chips{display:flex;flex-wrap:wrap;gap:0.35rem}
 .work-chip{font-size:0.66rem;font-weight:600;padding:0.2rem 0.6rem;background:rgba(255,255,255,0.07);color:rgba(250,248,244,0.55);border-radius:100px}
 
-/* RESULTS & PROOF */
+/* Work card link badge */
+.work-link-badge{
+  display:inline-flex;align-items:center;gap:0.35rem;
+  font-size:0.7rem;font-weight:600;
+  color:var(--fire2);
+  margin-top:0.6rem;
+  letter-spacing:0.5px;
+}
+.work-link-badge svg{width:12px;height:12px;flex-shrink:0}
+
+/* ===== RESULTS - IMAGE CENTERED & FOCUSED ===== */
 #results{background:var(--paper);position:relative;overflow:hidden}
 .results-deco{position:absolute;right:-5%;top:10%;width:600px;height:600px;background:radial-gradient(circle,rgba(232,73,30,0.06),transparent 65%);pointer-events:none}
 #proof{background:var(--cream)}
@@ -168,8 +229,43 @@ h2.s-title em{font-style:italic;color:var(--fire)}
 .result-card{background:var(--card);border:1.5px solid var(--border);border-radius:22px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s}
 .result-card:hover{transform:translateY(-5px) rotate(-0.4deg);box-shadow:0 18px 45px rgba(232,73,30,0.1);border-color:var(--fire)}
 #proof .result-card{background:var(--card)}
-.result-img-wrap{width:100%;aspect-ratio:4/3;position:relative;overflow:hidden;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:2.5rem}
-.result-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* FIXED: Image wrapper - centered and properly focused */
+.result-img-wrap{
+  width:100%;
+  aspect-ratio:16/10;
+  position:relative;
+  overflow:hidden;
+  background:#f5f5f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2.5rem;
+}
+.result-img-wrap img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;       /* contain = poora image dikhe, crop nahi */
+  object-position:center center;  /* bilkul center mein */
+  background:#fff;
+  padding:8px;              /* thoda space around image */
+  transition:transform 0.4s;
+}
+.result-card:hover .result-img-wrap img{transform:scale(1.04)}
+
+/* Proof section screenshot images - larger & clearly visible */
+#proof .result-img-wrap{
+  aspect-ratio:16/9;
+  background:#f0f0f0;
+}
+#proof .result-img-wrap img{
+  object-fit:contain;
+  object-position:center;
+  padding:4px;
+}
+
 .result-body{padding:1.3rem}
 .result-big{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .result-note{font-size:0.78rem;color:var(--muted);margin-top:0.35rem;line-height:1.5}
@@ -206,7 +302,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 .reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
 
 /* ============================================
-   RESPONSIVE — FIXED FOR MOBILE
+   RESPONSIVE
    ============================================ */
 @media(max-width:1024px){
   .hero-photo-ring{width:240px;height:240px}
@@ -227,85 +323,33 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
 }
 
 @media(max-width:600px){
-  /* NAV */
   .nav-links{display:none}
   .hamburger{display:flex}
   nav{padding:0.85rem 4%}
-
-  /* HERO — main fix: naam screen ke andar rahega */
-  #hero{
-    padding:5.5rem 4% 3rem;
-    gap:1.8rem;
-    min-height:100svh;
-  }
-  h1.hero-name{
-    font-size:clamp(2.2rem,10.5vw,3.5rem);
-    letter-spacing:-1px;
-    line-height:0.95;
-    word-break:break-word;
-    overflow-wrap:break-word;
-    width:100%;
-    max-width:100%;
-  }
+  #hero{padding:5.5rem 4% 3rem;gap:1.8rem;min-height:100svh}
+  h1.hero-name{font-size:clamp(2.2rem,10.5vw,3.5rem);letter-spacing:-1px;line-height:0.95;word-break:break-word;overflow-wrap:break-word;width:100%;max-width:100%}
   h1.hero-name .line2{-webkit-text-stroke:1.5px var(--ink)}
-  .hero-eyebrow{
-    font-size:0.66rem;
-    letter-spacing:2px;
-    padding:0.35rem 0.85rem;
-    margin-bottom:1.1rem;
-  }
-  .hero-desc{
-    font-size:0.9rem;
-    max-width:100%;
-    margin-bottom:1.5rem;
-  }
-  /* Buttons — full width on mobile */
-  .hero-actions{
-    flex-direction:column;
-    align-items:stretch;
-    gap:0.75rem;
-    width:100%;
-  }
-  .btn-fire{
-    width:100%;
-    justify-content:center;
-    padding:0.88rem 1.5rem;
-    font-size:0.86rem;
-  }
-  .btn-ghost{
-    justify-content:center;
-    padding-bottom:3px;
-  }
-
-  /* PHOTO + STATS */
+  .hero-eyebrow{font-size:0.66rem;letter-spacing:2px;padding:0.35rem 0.85rem;margin-bottom:1.1rem}
+  .hero-desc{font-size:0.9rem;max-width:100%;margin-bottom:1.5rem}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:0.75rem;width:100%}
+  .btn-fire{width:100%;justify-content:center;padding:0.88rem 1.5rem;font-size:0.86rem}
+  .btn-ghost{justify-content:center;padding-bottom:3px}
   .hero-photo-ring{width:150px;height:150px}
   .hero-stats{gap:0.5rem}
   .stat-orb{padding:0.8rem 0.55rem;min-width:0;flex:1}
   .orb-num{font-size:1.55rem}
   .orb-label{font-size:0.55rem;letter-spacing:0.8px}
-
-  /* SECTIONS */
   section{padding:3rem 4%}
   h2.s-title{font-size:1.75rem;letter-spacing:-0.8px}
   .s-sub{font-size:0.87rem;margin-bottom:2rem}
-
-  /* CARDS */
   .services-grid,.work-grid{grid-template-columns:1fr}
   .svc-card{padding:1.6rem}
   .results-grid{grid-template-columns:1fr 1fr}
-
-  /* ABOUT */
   .skills-wrap{grid-template-columns:1fr 1fr}
   .about-text{font-size:0.9rem}
-
-  /* CONTACT */
   .contact-links{grid-template-columns:1fr}
   .clink{padding:1rem}
-
-  /* FOOTER */
   footer{flex-direction:column;text-align:center;padding:1.8rem 4%}
-
-  /* WHATSAPP */
   .wa-float{width:48px;height:48px;font-size:1.2rem;bottom:1rem;right:1rem}
 }
 
@@ -491,49 +535,83 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
   </div>
 </section>
 
-<!-- WORK -->
+<!-- WORK - CLICKABLE CARDS WITH REAL WEBSITE LINKS -->
 <section id="work">
   <div class="work-deco"></div>
   <div class="s-tag reveal">Portfolio</div>
   <h2 class="s-title reveal reveal-d1">Featured <em>Work</em></h2>
-  <p class="s-sub reveal reveal-d2">Real campaigns, real results. A look at the brands I've helped grow.</p>
+  <p class="s-sub reveal reveal-d2">Real campaigns, real results. Click any card to visit the live website.</p>
   <div class="work-grid">
-    <div class="work-card reveal reveal-d1">
+
+    <!-- Card 1 — Shani Mandir -->
+    <a href="https://shanimandiralipur.com" target="_blank" rel="noopener noreferrer" class="work-card reveal reveal-d1">
       <div class="work-thumb thumb-bg-1">
         <img src="images/shanimandir.png" alt="Shani Mandir Alipur" onerror="this.style.display='none'"/>
+        <div class="work-thumb-overlay"></div>
         <span>🕉️</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Religious / Social Media</div>
         <div class="work-name">Shani Mandir Alipur</div>
         <div class="work-about">Digital outreach and social media marketing for Shani Mandir Alipur. Event promotion, devotee awareness, and targeted Facebook campaigns.</div>
-        <div class="work-chips"><span class="work-chip">Facebook Ads</span><span class="work-chip">Instagram</span><span class="work-chip">Brand Awareness</span></div>
+        <div class="work-chips">
+          <span class="work-chip">Facebook Ads</span>
+          <span class="work-chip">Instagram</span>
+          <span class="work-chip">Brand Awareness</span>
+        </div>
+        <div class="work-link-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          shanimandiralipur.com
+        </div>
       </div>
-    </div>
-    <div class="work-card reveal reveal-d2">
+    </a>
+
+    <!-- Card 2 — Matrimonial Today -->
+    <a href="https://matrimonialtoday.com" target="_blank" rel="noopener noreferrer" class="work-card reveal reveal-d2">
       <div class="work-thumb thumb-bg-2">
         <img src="images/matrimonial.png" alt="Matrimonial Today" onerror="this.style.display='none'"/>
+        <div class="work-thumb-overlay"></div>
         <span>💍</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Matrimony / Lead Generation</div>
         <div class="work-name">Matrimonial Today</div>
         <div class="work-about">Lead generation campaigns for MatrimonialToday.com — scaled profile registrations at a low cost-per-lead using Facebook and Google Ads.</div>
-        <div class="work-chips"><span class="work-chip">Lead Gen</span><span class="work-chip">Google Ads</span><span class="work-chip">Low CPL</span></div>
+        <div class="work-chips">
+          <span class="work-chip">Lead Gen</span>
+          <span class="work-chip">Google Ads</span>
+          <span class="work-chip">Low CPL</span>
+        </div>
+        <div class="work-link-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          matrimonialtoday.com
+        </div>
       </div>
-    </div>
-    <div class="work-card reveal reveal-d3">
+    </a>
+
+    <!-- Card 3 — Plot & Land -->
+    <a href="https://plotlandproperty.com" target="_blank" rel="noopener noreferrer" class="work-card reveal reveal-d3">
       <div class="work-thumb thumb-bg-3">
         <img src="images/plotland.png" alt="Real Estate Campaign" onerror="this.style.display='none'"/>
+        <div class="work-thumb-overlay"></div>
         <span>🏘️</span>
       </div>
       <div class="work-body">
         <div class="work-cat">Real Estate / Performance</div>
         <div class="work-name">Plot &amp; Land Campaign</div>
         <div class="work-about">Geo-targeted Facebook and Google Ads for real estate developers — captured high-intent buyers and generated qualified property enquiries.</div>
-        <div class="work-chips"><span class="work-chip">Geo Targeting</span><span class="work-chip">Facebook Ads</span><span class="work-chip">Real Estate</span></div>
+        <div class="work-chips">
+          <span class="work-chip">Geo Targeting</span>
+          <span class="work-chip">Facebook Ads</span>
+          <span class="work-chip">Real Estate</span>
+        </div>
+        <div class="work-link-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          plotlandproperty.com
+        </div>
       </div>
-    </div>
+    </a>
+
   </div>
 </section>
 
