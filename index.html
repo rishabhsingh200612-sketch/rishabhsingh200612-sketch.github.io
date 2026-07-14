@@ -110,7 +110,7 @@ h2.s-title em{font-style:italic;color:var(--fire)}
 .about-text{font-size:1rem;line-height:1.9;color:rgba(250,248,244,0.72);font-weight:300}
 .about-text strong{color:var(--paper);font-weight:600}
 .about-text p+p{margin-top:1rem}
-.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:1.8rem}
+.skills-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:0.5rem;margin-top:1.8rem}
 .skill-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(250,248,244,0.8);padding:0.5rem 0.85rem;border-radius:100px;font-size:0.76rem;font-weight:500;transition:all 0.2s;text-align:center}
 .skill-pill:hover{background:rgba(232,73,30,0.18);border-color:rgba(232,73,30,0.4);color:var(--fire2)}
 .xp-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:1.6rem;margin-bottom:1rem;transition:all 0.2s}
@@ -118,6 +118,9 @@ h2.s-title em{font-style:italic;color:var(--fire)}
 .xp-year{font-size:0.7rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem}
 .xp-role{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--paper);margin-bottom:0.25rem}
 .xp-company{font-size:0.82rem;color:rgba(250,248,244,0.45)}
+.xp-list{list-style:none;margin-top:0.9rem;padding-top:0.9rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:0.5rem}
+.xp-list li{font-size:0.8rem;line-height:1.55;color:rgba(250,248,244,0.62);padding-left:1.1rem;position:relative;font-weight:300}
+.xp-list li::before{content:'';position:absolute;left:0;top:0.55em;width:6px;height:6px;border-radius:50%;background:var(--fire2)}
 
 /* SERVICES */
 #services{background:var(--cream)}
@@ -457,30 +460,54 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.07);padding
         <p>I also build <strong>WordPress websites</strong> — fast, mobile-friendly, and SEO-ready. I don't just run ads, I build <strong>complete marketing funnels</strong> that convert visitors into paying customers.</p>
       </div>
       <div class="skills-wrap reveal reveal-d3">
-        <div class="skill-pill">Facebook Ads</div>
+        <div class="skill-pill">SEO (On-Page)</div>
         <div class="skill-pill">Google Ads</div>
-        <div class="skill-pill">Meta Business Suite</div>
+        <div class="skill-pill">Meta Ads (FB &amp; IG)</div>
+        <div class="skill-pill">Social Media Marketing</div>
+        <div class="skill-pill">SMO</div>
+        <div class="skill-pill">Campaign Optimization</div>
+        <div class="skill-pill">Social Media Advertising</div>
+        <div class="skill-pill">WordPress</div>
+        <div class="skill-pill">Elementor</div>
+        <div class="skill-pill">E-commerce Websites</div>
+        <div class="skill-pill">Canva Designing</div>
+        <div class="skill-pill">Advanced Excel</div>
+        <div class="skill-pill">Keyword Research</div>
+        <div class="skill-pill">Analytics &amp; Reporting</div>
+        <div class="skill-pill">Backlink Building</div>
+        <div class="skill-pill">Google Search Console</div>
         <div class="skill-pill">Google Analytics</div>
+        <div class="skill-pill">Meta Ads Manager</div>
         <div class="skill-pill">Lead Generation</div>
-        <div class="skill-pill">Funnel Building</div>
-        <div class="skill-pill">A/B Testing</div>
         <div class="skill-pill">Retargeting</div>
-        <div class="skill-pill">Copywriting</div>
-        <div class="skill-pill">WordPress Dev</div>
-        <div class="skill-pill">SEO Basics</div>
-        <div class="skill-pill">ROAS Optimization</div>
       </div>
     </div>
     <div class="about-right reveal reveal-d2">
       <div class="xp-card">
-        <div class="xp-year">2024 — 2025</div>
-        <div class="xp-role">Digital Marketing Intern</div>
-        <div class="xp-company">Malik Enterprises</div>
+        <div class="xp-year">12 Months</div>
+        <div class="xp-role">Digital Marketing Executive</div>
+        <div class="xp-company">Shree Sidh Shani Mandir Trust</div>
+        <ul class="xp-list">
+          <li>Managed Google Ads and Meta Ads campaigns</li>
+          <li>Performed keyword research and on-page SEO optimization</li>
+          <li>Built 200+ high-quality white-hat backlinks every month using W3era, DupliChecker, Vefogix &amp; SEOBot AI</li>
+          <li>Monitored campaign performance using Meta Ads Manager</li>
+          <li>Designed and maintained WordPress websites</li>
+          <li>Created marketing creatives using Canva</li>
+          <li>Improved website visibility through SEO and digital marketing strategies</li>
+          <li>Optimized paid campaigns to increase leads and ROI</li>
+        </ul>
       </div>
       <div class="xp-card">
-        <div class="xp-year">2025 — Present</div>
-        <div class="xp-role">Digital Marketing Specialist</div>
-        <div class="xp-company">Real Estate, Matrimony &amp; Social Media</div>
+        <div class="xp-year">4 Months</div>
+        <div class="xp-role">Digital Marketing Intern</div>
+        <div class="xp-company">Malik Enterprises</div>
+        <ul class="xp-list">
+          <li>Assisted in Google Ads and Meta Ads campaign management</li>
+          <li>Supported SEO activities including keyword research and website optimization</li>
+          <li>Created social media posts and promotional creatives</li>
+          <li>Assisted with campaign monitoring and performance reporting</li>
+        </ul>
       </div>
     </div>
   </div>
